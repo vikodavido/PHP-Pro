@@ -40,7 +40,8 @@ class ValueObject {
 
     private function validateColor(int $color): void {
         if ($color < 0 || $color > 255) {
-            throw new InvalidArgumentException("Invalid color value. Must be between 0 and 255.");
+            throw new InvalidArgumentException("Invalid color value. Must be between 0  and 255.");
+            
         }
     }
 
