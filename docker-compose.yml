@@ -1,0 +1,33 @@
+version: '3.8'
+
+volumes:
+  db_data:
+
+networks:
+  app-network:
+    driver: bridge
+
+services:
+  app:
+    image: php:8.3-apache
+    restart: always
+    volumes:
+      - ./:/var/www/html 
+    ports:
+      - "8080:80" 
+    networks:
+      - app-network
+
+  db:
+    image: mysql:8.0
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: secret
+      MYSQL_DATABASE: php-2024
+    ports:
+      - "3306:3306"
+    volumes:
+      - db_data:/var/lib/mysql
+    networks:
+      - app-network
+
