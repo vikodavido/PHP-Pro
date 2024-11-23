@@ -2,6 +2,13 @@ CREATE DATABASE IF NOT EXISTS car_service;
 
 USE car_service;
 
+DROP TABLE IF EXISTS orders;
+DROP TABLE IF EXISTS customers;
+DROP TABLE IF EXISTS drivers;
+DROP TABLE IF EXISTS cars;
+DROP TABLE IF EXISTS parks;
+
+
 CREATE TABLE parks (
     id INT AUTO_INCREMENT PRIMARY KEY,
     address VARCHAR(255) NOT NULL
@@ -17,7 +24,7 @@ CREATE TABLE cars (
 
 CREATE TABLE drivers (
     id INT AUTO_INCREMENT PRIMARY KEY,
-    car_id INT NOT NULL,
+    car_id INT, 
     name VARCHAR(100) NOT NULL,
     phone VARCHAR(15),
     FOREIGN KEY (car_id) REFERENCES cars(id) ON DELETE SET NULL
