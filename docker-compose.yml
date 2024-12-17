@@ -9,25 +9,29 @@ networks:
 
 services:
   app:
-    image: php:8.3-apache
+    build: 
+      context: .
+      dockerfile: ./Dockerfile
     restart: always
     volumes:
-      - ./:/var/www/html 
+      - ./:/var/www/html
     ports:
-      - "8080:80" 
+      - "8080:80"
     networks:
       - app-network
+    depends_on:
+      - db
 
   db:
     image: mysql:8.0
     restart: always
     environment:
       MYSQL_ROOT_PASSWORD: secret
-      MYSQL_DATABASE: php-2024
+      MYSQL_DATABASE: car_service
     ports:
       - "3306:3306"
     volumes:
       - db_data:/var/lib/mysql
+      - ./init.sql:/docker-entrypoint-initdb.d/init.sql
     networks:
       - app-network
-
